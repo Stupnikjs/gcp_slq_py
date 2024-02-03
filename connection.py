@@ -1,4 +1,5 @@
 import psycopg2
+import pandas 
 
 # Connection parameters
 conn_params = {
@@ -20,9 +21,10 @@ conn_string = " ".join([f"{key}={value}" for key, value in conn_params.items()])
 print(conn_string)
 
 # Establish the connection
-try:
-    conn = psycopg2.connect(conn_string)
-    print("Connection to PostgreSQL established successfully.")
-    # Perform database operations here
-except psycopg2.Error as e:
-    print("Error connecting to PostgreSQL:", e)
+
+with psycopg2.connect(conn_string) as conn:
+    cursor = conn.cursor()
+    cursor.execute('CREATE DATABASE house ()')
+
+    
+    
